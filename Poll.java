@@ -7,6 +7,7 @@ public class Poll
     String question;
     ArrayList<String> item;
     Scanner scan;
+    ArrayList<ArrayList> fullLists = new ArrayList<ArrayList>();
     
     public Poll(FileReader fRead, String name, String quest) throws IOException
     {
@@ -25,31 +26,56 @@ public class Poll
     
     public void run()
     {
-        
+        quickSort(item, 0, item.size(), 1);
+        ArrayList sortedForUser = item;
+        System.out.println("Your ratings are :");
+        for (int i = 0; i < sortedForUser.size(); i++)
+            System.out.println(sortedForUser.get(i));
+        fullLists.add(sortedForUser);
     }
     
     public void aggregate()
     {
-        
+        quickSort(item, 0, item.size(), 2);
+        ArrayList fullSort = item;
+        System.out.println("The full ratings are :");
+        for (int i = 0; i < fullSort.size(); i++)
+            System.out.println(fullSort.get(i));
     }
     
-    public boolean query(String first, String second)
+    public boolean query(String first, String second, int type)
     {
-        System.out.println(question);
-        System.out.println("(1) " + first + " or (2) " + second + "?");
-        int response = scan.nextInt();
-        while (response != 1 || response != 2)
+        if(type == 1)
         {
-            System.out.println("Please select (1) or (2).");
-            response = scan.nextInt();
-        }
-        if (response == 1)
-        {
-            return false;
+            System.out.println(question);
+            System.out.println("(1) " + first + " or (2) " + second + "?");
+            int response = scan.nextInt();
+            while (response != 1 || response != 2)
+            {
+                System.out.println("Please select (1) or (2).");
+                response = scan.nextInt();
+            }
+            if (response == 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
         {
-            return true;
+            int firstIsGreater = 0;
+            for (int i = 0; i < fullLists.size(); i++)
+            {
+                if(fullLists.get(i).indexOf(first) > fullLists.get(i).indexOf(2))
+                    firstIsGreater++;
+            }
+            if (firstIsGreater <= fullLists.size()/2)
+                return false;
+            else
+                return true;
         }
     }
     
@@ -59,29 +85,29 @@ public class Poll
     }
     
     // Quicksort algorithm (from Java Foundations)
-    public void quickSort(ArrayList<String> data, int min, int max)
+    public void quickSort(ArrayList<String> data, int min, int max, int type)
     {
         int pivot;
         if(min < max)
         {
-            pivot = partition(data, min, max);
-            quickSort(data, min, pivot-1);
-            quickSort(data, pivot+1, max);
+            pivot = partition(data, min, max, type);
+            quickSort(data, min, pivot-1, type);
+            quickSort(data, pivot+1, max, type);
         }
     }
     
-    private int partition(ArrayList<String> data, int min, int max)
+    private int partition(ArrayList<String> data, int min, int max, int type)
     {
         String partitionValue = data.get(min).toString();
         int left = min;
         int right = max;
         while (left < right)
         {
-            while(query(data.get(left), partitionValue) && left < right)
+            while(query(data.get(left), partitionValue, type) && left < right)
             {
                 left++;
             }
-            while(!query(data.get(right), partitionValue))
+            while(!query(data.get(right), partitionValue, type))
             {
                 right--;
             }

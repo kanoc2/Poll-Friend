@@ -42,8 +42,8 @@ public class PollFriend
             {
                 currentPoll = allPolls[pollNo];
                 currentPoll.run();
-                System.out.println();
                 System.out.println("Thank you for taking " + currentPoll.toString());
+                System.out.println();
             }
 
             System.out.print("User Name: ");
