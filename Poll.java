@@ -1,17 +1,19 @@
 import java.util.*;
+import java.io.*;
 
 public class Poll
 {
     String title;
     String question;
-    ArrayList item;
+    ArrayList<String> item;
+    Scanner scan;
     
     public Poll(FileReader fRead, String name, String quest) throws IOException
     {
-        Scanner scan = new Scanner(fRead);
+        scan = new Scanner(fRead);
         title = name;
         question = quest;
-        item = new ArrayList();
+        item = new ArrayList<String>();
         
         while (scan.hasNext())
         {
@@ -21,20 +23,25 @@ public class Poll
         System.out.println(item);
     }
     
-    public void Run()
+    public void run()
     {
         
     }
     
-    public boolean Query(String first, String second)
+    public void aggregate()
+    {
+        
+    }
+    
+    public boolean query(String first, String second)
     {
         System.out.println(question);
-        System.out.println("(1) " + first + " or (2) " + second + "?")
+        System.out.println("(1) " + first + " or (2) " + second + "?");
         int response = scan.nextInt();
         while (response != 1 || response != 2)
         {
             System.out.println("Please select (1) or (2).");
-            int response = scan.nextInt();
+            response = scan.nextInt();
         }
         if (response == 1)
         {
@@ -52,7 +59,7 @@ public class Poll
     }
     
     // Quicksort algorithm (from Java Foundations)
-    public static void quickSort(ArrayList data, int min, int max)
+    public void quickSort(ArrayList<String> data, int min, int max)
     {
         int pivot;
         if(min < max)
@@ -63,18 +70,18 @@ public class Poll
         }
     }
     
-    private static int partition(ArrayList data, int min, int max)
+    private int partition(ArrayList<String> data, int min, int max)
     {
         String partitionValue = data.get(min).toString();
         int left = min;
         int right = max;
         while (left < right)
         {
-            while(Query(data.get(left)), partitionValue && left < right)
+            while(query(data.get(left), partitionValue) && left < right)
             {
                 left++;
             }
-            while(!Query(data.get(right), partitionValue))
+            while(!query(data.get(right), partitionValue))
             {
                 right--;
             }
@@ -87,7 +94,7 @@ public class Poll
         return right;
     }
     
-    public static void swap(ArrayList data, int index1, int index2)
+    public void swap(ArrayList<String> data, int index1, int index2)
     {
         String temp = data.get(index1);
         data.set(index1, data.get(index2));

@@ -15,7 +15,7 @@ public class PollFriend
         Poll[] allPolls;
         Poll currentPoll;
 
-        if (user.equals("admin");
+        if (user.equals("admin"));
             admin = true;
 	
         while (!admin)
@@ -56,7 +56,7 @@ public class PollFriend
         pollNo = -1;
         for (int k = 0; k < allPolls.length; k++)
         {
-            if (select.equals(allPolls[j].toString()))
+            if (select.equals(allPolls[k].toString()))
                 pollNo = k;
         }
 
