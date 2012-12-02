@@ -14,5 +14,5 @@ into account and the list will be formed from the preferences of each pair, take
 This will allow the end product to be an accurate ranking of the preferences of the human computers.
 
 In theory, these aggregated lists will rank the popularity of the itemse presented in the question, 
-which can be used by advertisers or other recommenders that utilize human opinons for their 
+which can be used by advertisers or other recommenders that utilize human opinions for their 
 functionailty.
