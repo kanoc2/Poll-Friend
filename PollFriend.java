@@ -1,8 +1,9 @@
 import java.util.*;
+import java.io.*;
 
 public class PollFriend
 {
-    public static void main (String[] args)
+    public static void main (String[] args) throws IOException
     {
         boolean admin = false;
         Scanner sc = new Scanner(System.in);
@@ -10,12 +11,25 @@ public class PollFriend
         int pollNo;
 
         System.out.print("User Name: ");
-        String user = sc.next();
-	
-        Poll[] allPolls;
-        Poll currentPoll;
+        String person = sc.next();
+	user csuser;
 
-        if (user.equals("admin"));
+        Poll[] allPolls;
+        Poll currentPoll = null;
+
+	allPolls = new Poll[3];
+	allPolls[0] = new Poll(new File("sportsData.txt"), "Sports", "Which is more fun?");
+	allPolls[1] = new Poll(new File("fruitData.txt"), "Fruit", "Which tastes better?");
+	allPolls[2] = new Poll(new File("socialNetworkData.txt"), "Web", "Which wastes more time?");
+
+	File f = new File(person + ".txt");
+	if (f.exists())
+		csuser = new user(person);
+	else
+		csuser = new user(); 
+		
+	
+        if (person.equals("admin"))
             admin = true;
 	
         while (!admin)
@@ -47,7 +61,13 @@ public class PollFriend
             }
 
             System.out.print("User Name: ");
-            user = sc.next();
+            person = sc.next();
+	    
+            f = new File(person + ".txt");
+            if (f.exists())
+		csuser = new user(person);
+	    else
+		csuser = new user();
         }
 	
         System.out.println();

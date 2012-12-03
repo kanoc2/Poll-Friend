@@ -9,8 +9,9 @@ public class Poll
     Scanner scan;
     ArrayList<ArrayList> fullLists = new ArrayList<ArrayList>();
     
-    public Poll(FileReader fRead, String name, String quest) throws IOException
+    public Poll(File inF, String name, String quest) throws IOException
     {
+	FileReader fRead = new FileReader(inF);
         scan = new Scanner(fRead);
         title = name;
         question = quest;
@@ -21,12 +22,12 @@ public class Poll
             item.add(scan.next());
         }
 
-        System.out.println(item);
+       // System.out.println(item);
     }
     
     public void run()
     {
-        quickSort(item, 0, item.size(), 1);
+        quickSort(item, 0, item.size()-1, 1);
         ArrayList sortedForUser = item;
         System.out.println("Your ratings are :");
         for (int i = 0; i < sortedForUser.size(); i++)
@@ -36,7 +37,7 @@ public class Poll
     
     public void aggregate()
     {
-        quickSort(item, 0, item.size(), 2);
+        quickSort(item, 0, item.size()-1, 2);
         ArrayList fullSort = item;
         System.out.println("The full ratings are :");
         for (int i = 0; i < fullSort.size(); i++)
@@ -45,23 +46,27 @@ public class Poll
     
     public boolean query(String first, String second, int type)
     {
+	scan = new Scanner(System.in);
+
         if(type == 1)
         {
             System.out.println(question);
             System.out.println("(1) " + first + " or (2) " + second + "?");
             int response = scan.nextInt();
-            while (response != 1 || response != 2)
+		
+            while (response != 1 && response != 2)
             {
                 System.out.println("Please select (1) or (2).");
                 response = scan.nextInt();
             }
+		
             if (response == 1)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
         else
@@ -98,16 +103,16 @@ public class Poll
     
     private int partition(ArrayList<String> data, int min, int max, int type)
     {
-        String partitionValue = data.get(min).toString();
+        String partitionValue = data.get((min + max)/2).toString();
         int left = min;
         int right = max;
         while (left < right)
         {
-            while(query(data.get(left), partitionValue, type) && left < right)
+            while(!query(data.get(left), partitionValue, type) && left < right)
             {
                 left++;
             }
-            while(!query(data.get(right), partitionValue, type))
+            while(query(data.get(right), partitionValue, type))
             {
                 right--;
             }

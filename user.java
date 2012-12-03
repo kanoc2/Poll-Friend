@@ -12,9 +12,9 @@ public class user	{
 	//It asks for a username and password
 	public user()	{
 		Scanner kb = new Scanner(System.in);
-		System.out.println("Enter new Username");
+		System.out.print("Confirm username: ");
 		name = kb.next();
-		password = kb.next();
+		//password = kb.next();
 		taken = new Hashtable();
 	}
 	
