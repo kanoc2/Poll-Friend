@@ -1,9 +1,18 @@
+// Name: Ken Whittaker, Matt Kanoc, Brandon Lewis
+// Course: CSC 470, Section 1
+// Semester: Fall 2012
+// Instructor: Dr. Pulimood
+// Collaborative Project: Poll-Friend
+// Description: Driver class to test poll functionality, sorting, and user
+//              data to view aggregated results.
+// Filename: user.java
+// Last modified on: 12/3/2012
+
 import java.util.*;
 import java.io.*;
 
 public class user	{
 	String name;
-	String password;
 	Hashtable taken;
 	BufferedReader in;
 	BufferedWriter out;
@@ -14,7 +23,6 @@ public class user	{
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Confirm username: ");
 		name = kb.next();
-		//password = kb.next();
 		taken = new Hashtable();
 	}
 	
@@ -33,13 +41,8 @@ public class user	{
 		}
 	}
 	
-	//Unfinished
-	public boolean validate(String pw)	{
-		return true;
-	}
-	
 	//checks to see if a user has been polled from a certain poll
-	//For a given string, see if it is in a hashtable and return that. 
+	//For a given string, see if it is in a hashtable and return that.
 	public boolean hasPolled(String name)	{
 		return taken.containsKey(name);
 	}
@@ -62,7 +65,4 @@ public class user	{
 		
 		out.write(fullstring, 0, fullstring.length());
 	}
-	
-	
-
 }

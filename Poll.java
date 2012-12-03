@@ -1,3 +1,13 @@
+// Name: Ken Whittaker, Matt Kanoc, Brandon Lewis
+// Course: CSC 470, Section 1
+// Semester: Fall 2012
+// Instructor: Dr. Pulimood
+// Collaborative Project: Poll-Friend
+// Description: Driver class to test poll functionality, sorting, and user
+//              data to view aggregated results.
+// Filename: Poll.java
+// Last modified on: 12/3/2012
+
 import java.util.*;
 import java.io.*;
 
@@ -21,8 +31,6 @@ public class Poll
         {
             item.add(scan.next());
         }
-
-       // System.out.println(item);
     }
     
     public void run()
@@ -62,11 +70,11 @@ public class Poll
 		
             if (response == 1)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
         else
@@ -78,9 +86,9 @@ public class Poll
                     firstIsGreater++;
             }
             if (firstIsGreater <= fullLists.size()/2)
-                return false;
-            else
                 return true;
+            else
+                return false;
         }
     }
     
@@ -104,47 +112,4 @@ public class Poll
             data.set(position, key);
         }
     }
-        
-//    // Quicksort algorithm (from Java Foundations)
-//    public void quickSort(ArrayList<String> data, int min, int max, int type)
-//    {
-//        int pivot;
-//        if(min < max)
-//        {
-//            pivot = partition(data, min, max, type);
-//            quickSort(data, min, pivot-1, type);
-//            quickSort(data, pivot+1, max, type);
-//        }
-//    }
-//    
-//    private int partition(ArrayList<String> data, int min, int max, int type)
-//    {
-//        String partitionValue = data.get((min + max)/2).toString();
-//        int left = min;
-//        int right = max;
-//        while (left < right)
-//        {
-//            while(!query(data.get(left), partitionValue, type) && left < right)
-//            {
-//                left++;
-//            }
-//            while(query(data.get(right), partitionValue, type) && left < right)
-//            {
-//                right--;
-//            }
-//            if(left < right)
-//            {
-//                swap(data, left, right);
-//            }
-//        }
-//        swap(data, min, right);
-//        return right;
-//    }
-//    
-//    public void swap(ArrayList<String> data, int index1, int index2)
-//    {
-//        String temp = data.get(index1);
-//        data.set(index1, data.get(index2));
-//        data.set(index2, temp);
-//    }
 }
