@@ -3,8 +3,7 @@
 // Semester: Fall 2012
 // Instructor: Dr. Pulimood
 // Collaborative Project: Poll-Friend
-// Description: Driver class to test poll functionality, sorting, and user
-//              data to view aggregated results.
+// Description: Store all Poll organization and sorting features
 // Filename: Poll.java
 // Last modified on: 12/3/2012
 
