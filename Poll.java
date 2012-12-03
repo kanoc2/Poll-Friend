@@ -27,7 +27,7 @@ public class Poll
     
     public void run()
     {
-        quickSort(item, 0, item.size()-1, 1);
+        insertionSort(item, 1);
         ArrayList sortedForUser = item;
         System.out.println("Your ratings are :");
         for (int i = 0; i < sortedForUser.size(); i++)
@@ -37,7 +37,7 @@ public class Poll
     
     public void aggregate()
     {
-        quickSort(item, 0, item.size()-1, 2);
+        insertionSort(item, 2);
         ArrayList fullSort = item;
         System.out.println("The full ratings are :");
         for (int i = 0; i < fullSort.size(); i++)
@@ -89,46 +89,62 @@ public class Poll
         return title;
     }
     
-    // Quicksort algorithm (from Java Foundations)
-    public void quickSort(ArrayList<String> data, int min, int max, int type)
+    public void insertionSort (ArrayList<String> data, int type)
     {
-        int pivot;
-        if(min < max)
+        for (int index = 1; index < data.size(); index++)
         {
-            pivot = partition(data, min, max, type);
-            quickSort(data, min, pivot-1, type);
-            quickSort(data, pivot+1, max, type);
+            String key = data.get(index);
+            int position = index;
+            
+            while (position > 0 && query(data.get(position-1), key, type))
+            {
+                data.set(position, data.get(position-1));
+                position--;
+            }
+            data.set(position, key);
         }
     }
-    
-    private int partition(ArrayList<String> data, int min, int max, int type)
-    {
-        String partitionValue = data.get((min + max)/2).toString();
-        int left = min;
-        int right = max;
-        while (left < right)
-        {
-            while(!query(data.get(left), partitionValue, type) && left < right)
-            {
-                left++;
-            }
-            while(query(data.get(right), partitionValue, type))
-            {
-                right--;
-            }
-            if(left < right)
-            {
-                swap(data, left, right);
-            }
-        }
-        swap(data, min, right);
-        return right;
-    }
-    
-    public void swap(ArrayList<String> data, int index1, int index2)
-    {
-        String temp = data.get(index1);
-        data.set(index1, data.get(index2));
-        data.set(index2, temp);
-    }
+        
+//    // Quicksort algorithm (from Java Foundations)
+//    public void quickSort(ArrayList<String> data, int min, int max, int type)
+//    {
+//        int pivot;
+//        if(min < max)
+//        {
+//            pivot = partition(data, min, max, type);
+//            quickSort(data, min, pivot-1, type);
+//            quickSort(data, pivot+1, max, type);
+//        }
+//    }
+//    
+//    private int partition(ArrayList<String> data, int min, int max, int type)
+//    {
+//        String partitionValue = data.get((min + max)/2).toString();
+//        int left = min;
+//        int right = max;
+//        while (left < right)
+//        {
+//            while(!query(data.get(left), partitionValue, type) && left < right)
+//            {
+//                left++;
+//            }
+//            while(query(data.get(right), partitionValue, type) && left < right)
+//            {
+//                right--;
+//            }
+//            if(left < right)
+//            {
+//                swap(data, left, right);
+//            }
+//        }
+//        swap(data, min, right);
+//        return right;
+//    }
+//    
+//    public void swap(ArrayList<String> data, int index1, int index2)
+//    {
+//        String temp = data.get(index1);
+//        data.set(index1, data.get(index2));
+//        data.set(index2, temp);
+//    }
 }
