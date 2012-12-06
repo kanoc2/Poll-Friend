@@ -5,7 +5,7 @@
 // Collaborative Project: Poll-Friend
 // Description: Maintains users for polls and organize in Hashtable
 // Filename: user.java
-// Last modified on: 12/3/2012
+// Last modified on: 12/6/2012
 
 import java.util.*;
 import java.io.*;
@@ -59,9 +59,7 @@ public class user	{
 		String fullstring = "";
 		while (tmp.hasNext())	{
 			String temp = tmp.next().toString();
-			System.out.println(temp);
 			fullstring = fullstring + temp + "\n";
-			System.out.println("I: " + fullstring);
 		}
 		
 		out.write(fullstring);

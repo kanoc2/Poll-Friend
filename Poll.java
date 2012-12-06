@@ -5,7 +5,7 @@
 // Collaborative Project: Poll-Friend
 // Description: Store all Poll organization and sorting features
 // Filename: Poll.java
-// Last modified on: 12/3/2012
+// Last modified on: 12/6/2012
 
 import java.util.*;
 import java.io.*;
@@ -18,6 +18,7 @@ public class Poll
     Scanner scan;
     ArrayList<ArrayList> fullLists = new ArrayList<ArrayList>();
     
+    // Each poll requires a text file of data, poll title, and a question
     public Poll(File inF, String name, String quest) throws IOException
     {
 	FileReader fRead = new FileReader(inF);
@@ -32,6 +33,8 @@ public class Poll
         }
     }
     
+    // Does the actual sort for user
+    // Insertion sort used to return results based on user's comparisons
     public void run()
     {
         insertionSort(item, 1);
@@ -42,6 +45,9 @@ public class Poll
         fullLists.add(sortedForUser);
     }
     
+    // Displays the results admin will see
+    // Uses insertion sort of the user data to produce aggregated
+    //   list of results. This is the desired end product. 
     public void aggregate()
     {
         insertionSort(item, 2);
@@ -51,6 +57,10 @@ public class Poll
             System.out.println(fullSort.get(i));
     }
     
+    // Interface to display a question and two choices
+    // Allows user to input their coice, system collects result
+    // If a choice exceeds threshhold of 50%, it becomes more popular
+    //    than another choice.
     public boolean query(String first, String second, int type)
     {
 	scan = new Scanner(System.in);
@@ -91,11 +101,13 @@ public class Poll
         }
     }
     
+    // Return title to string
     public String toString()
     {
         return title;
     }
     
+    // Insertion sort from Java Foundations, 2ed
     public void insertionSort (ArrayList<String> data, int type)
     {
         for (int index = 1; index < data.size(); index++)
