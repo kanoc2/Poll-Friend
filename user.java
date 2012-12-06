@@ -48,20 +48,23 @@ public class user	{
 	
 	//The user has just taken a new poll, and the hashtable needs to be updated
 	public void tookPoll(String st)	{
-		taken.put(st, 1);
+		taken.put(1, st);
 	}
 	
 	//When a user logs out, their file needs to be updated.
 	public void store()	throws java.io.IOException {
-		Set temp = taken.keySet();
-		Iterator tmp = temp.iterator();
-		out = new BufferedWriter(new FileWriter(new File(name + ".txt"), true));;
+		Collection c = taken.values();
+		Iterator tmp = c.iterator();
+		out = new BufferedWriter(new FileWriter(new File(name + ".txt"), true));
 		String fullstring = "";
 		while (tmp.hasNext())	{
-			fullstring.concat(tmp.next().toString());
-			fullstring.concat("/n");
+			String temp = tmp.next().toString();
+			System.out.println(temp);
+			fullstring = fullstring + temp + "\n";
+			System.out.println("I: " + fullstring);
 		}
 		
-		out.write(fullstring, 0, fullstring.length());
+		out.write(fullstring);
+		out.close();
 	}
 }
